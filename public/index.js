@@ -1,3 +1,4 @@
+
 const workoutTypeSelect = document.querySelector("#type");
 const cardioForm = document.querySelector(".cardio-form");
 const resistanceForm = document.querySelector(".resistance-form");
@@ -21,7 +22,7 @@ init();
 
 async function init() {
   if (location.pathname.includes("/exercise") && location.search.split("=")[1] === undefined) {
-    console.log("excersise")
+    console.log("excercise")
     const newWorkout = await API.createWorkout();
     const workout = await API.getLastWorkout();
     if (workout) {
@@ -45,6 +46,7 @@ async function init() {
 
 function handleWorkoutTypeChange(event) {
   workoutType = event.target.value;
+  console.log(workoutType);
 
   if (workoutType === "cardio") {
     cardioForm.classList.remove("d-none");
@@ -97,14 +99,8 @@ function validateInputs() {
     }
   }
 
-  if (isValid) {
-    completeButton.removeAttribute("disabled");
-    addButton.removeAttribute("disabled");
-  } else {
-    completeButton.setAttribute("disabled", true);
-    addButton.setAttribute("disabled", true);
-  }
 }
+
 
 async function handleFormSubmit(event) {
   event.preventDefault();
@@ -148,16 +144,16 @@ function clearInputs() {
   weightInput.value = "";
 }
 
-if(workoutTypeSelect) {
+if (workoutTypeSelect) {
   workoutTypeSelect.addEventListener("change", handleWorkoutTypeChange);
 }
-if(completeButton) {
-  completeButton.addEventListener("click", function(event) {
+if (completeButton) {
+  completeButton.addEventListener("click", function (event) {
     shouldNavigateAway = true;
     handleFormSubmit(event);
   });
 }
-if(addButton) {
+if (addButton) {
   addButton.addEventListener("click", handleFormSubmit);
 }
 toast.addEventListener("animationend", handleToastAnimationEnd);
